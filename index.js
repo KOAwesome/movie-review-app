@@ -1,10 +1,11 @@
 import app from "./server.js";
 import mongodb from "mongodb";
 import ReviewsDAO from "./dao/reviewsDAO.js";
-
+import dotenv from "dotenv"
 const MONGOClient = mongodb.MongoClient;
+dotenv.config();
 
-const uri = `mongodb+srv://mkssps42:luffy_02@cluster0.hj2bw1g.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`
+const uri = process.env.MONGO_URI;
 const port = 8000;
 
 MONGOClient.connect(
