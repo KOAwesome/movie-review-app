@@ -6,10 +6,9 @@ const main = document.getElementById("section");
 const form = document.getElementById("form");
 const search = document.getElementById("query");
 
-returnMovies(APILINK);
+returnMovies(APILINK)
 function returnMovies(url) {
-    fetch(url)
-        .then(res => res.json())
+    fetch(url).then(res => res.json())
         .then(function (data) {
             console.log(data.results);
             data.results.forEach(element => {
@@ -31,7 +30,7 @@ function returnMovies(url) {
 
                 const center = document.createElement('center');
 
-                title.innerHTML = `${element.title}<br><a href="movie.html?id=${element.id}&title=${title}">reviews<\a>`;
+                title.innerHTML = `${element.title}<br><a href="movie.html?id=${element.id}&title=${element.title}">reviews</a>`;
                 image.src = IMG_PATH + element.poster_path;
 
                 center.appendChild(image);
@@ -39,6 +38,7 @@ function returnMovies(url) {
                 div_card.appendChild(title);
                 div_column.appendChild(div_card);
                 div_row.appendChild(div_column);
+
                 main.appendChild(div_row);
             });
         });
@@ -47,12 +47,11 @@ function returnMovies(url) {
 form.addEventListener("submit", (e) => {
     e.preventDefault();
     main.innerHTML = '';
+
     const searchItem = search.value;
+
     if (searchItem) {
         returnMovies(SEARCHAPI + searchItem);
-        search.value = '';
+        search.value = "";
     }
 });
-
-returnMovies(APILINK);
-
