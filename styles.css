@@ -25,6 +25,10 @@ body {
     text-transform: uppercase;
 }
 
+.topnav a:hover {
+    color: #ff6347;
+}
+
 .topnav .search-container {
     float: right;
 }
