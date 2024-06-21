@@ -63,12 +63,17 @@ export default class ReviewsController {
     }
     static async apiDeleteReview(req, res, next) {
         try {
-            const reviewId = req.params.id
-            const reviewResponse = await ReviewsDAO.deleteReview(reviewId)
-            res.json({ status: "success" })
-        }
-        catch (e) {
-            res.status(500).json({ error: e.message })
+            const reviewId = req.params.id;
+            const deletionInfo = await ReviewsDAO.deleteReview(reviewId);
+
+            if (deletionInfo.deletedCount === 0) {
+                return res.status(404).json({ error: "Review not found" });
+            }
+
+            res.json({ status: "success" });
+        } catch (e) {
+            console.error(e);
+            res.status(500).json({ error: e.message });
         }
     }
     static async apiGetReviews(req, res, next) {
